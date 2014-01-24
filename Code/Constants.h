@@ -6,4 +6,5 @@
 //  Copyright (c) 2013 Fueled. All rights reserved.
 //
 
-// Add your constant here
+#error You must replace this string with your hockey app id.
+static NSString * const kHockeyAppIdentifier = @"APP_IDENTIFIER";
