@@ -15,7 +15,7 @@
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   self.window.backgroundColor = [UIColor whiteColor];
   
-  [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:kHockeyAppIdentifier];
+  [[BITHockeyManager sharedHockeyManager] configureWithBetaIdentifier:kHockeyAppIdentifier liveIdentifier:nil delegate:nil];
   [[BITHockeyManager sharedHockeyManager] startManager];
   [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
   
