@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Template-ios
 ============
 
@@ -11,3 +12,14 @@ This project template contains :
   - You have at your disposal CocoaLumberjack, which is a really cool logger and we will use that logger for every new project from now on. 
   - There is a Constants.h file which should be used for all the global constants. 
 
+=======
+Shoestore iOs Prototype
+=======================
+
+A prototype of LBM implementation using Bluetooth LE. This prototype is designed and developed on the recommendations that came from a research about LBM for small and medium retail companies.
+
+
+Requirements
+=======================
+To use this project you will need xCode 5.0 or higher installed on your computer. By opening the .xcworkspace the project should open in xCode with the folder structure. It is also highly recommended to have the iPhone Simulator installed.
+>>>>>>> 67f8499f622f7cd4ab927beacb896f538aa5acc8
