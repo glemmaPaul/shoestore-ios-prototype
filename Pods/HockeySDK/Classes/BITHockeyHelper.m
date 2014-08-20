@@ -76,6 +76,28 @@ NSString *bit_base64String(NSData * data, unsigned long length) {
 #endif
 }
 
+NSString *bit_settingsDir(void) {
+  static NSString *settingsDir = nil;
+  static dispatch_once_t predSettingsDir;
+  
+  dispatch_once(&predSettingsDir, ^{
+    NSFileManager *fileManager = [[NSFileManager alloc] init];
+    
+    // temporary directory for crashes grabbed from PLCrashReporter
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    settingsDir = [[paths objectAtIndex:0] stringByAppendingPathComponent:BITHOCKEY_IDENTIFIER];
+    
+    if (![fileManager fileExistsAtPath:settingsDir]) {
+      NSDictionary *attributes = [NSDictionary dictionaryWithObject: [NSNumber numberWithUnsignedLong: 0755] forKey: NSFilePosixPermissions];
+      NSError *theError = NULL;
+      
+      [fileManager createDirectoryAtPath:settingsDir withIntermediateDirectories: YES attributes: attributes error: &theError];
+    }
+  });
+  
+  return settingsDir;
+}
+
 BOOL bit_validateEmail(NSString *email) {
   NSString *emailRegex =
   @"(?:[a-z0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[a-z0-9!#$%\\&'*+/=?\\^_`{|}"
@@ -91,7 +113,13 @@ BOOL bit_validateEmail(NSString *email) {
 }
 
 NSString *bit_keychainHockeySDKServiceName(void) {
-  NSString *serviceName = [NSString stringWithFormat:@"%@.HockeySDK", bit_mainBundleIdentifier()];
+  static NSString *serviceName = nil;
+  static dispatch_once_t predServiceName;
+  
+  dispatch_once(&predServiceName, ^{
+    serviceName = [NSString stringWithFormat:@"%@.HockeySDK", bit_mainBundleIdentifier()];
+  });
+  
   return serviceName;
 }
 
@@ -188,6 +216,127 @@ NSString *bit_appAnonID(void) {
   return appAnonID;
 }
 
+BOOL bit_isPreiOS7Environment(void) {
+  static BOOL isPreiOS7Environment = YES;
+  static dispatch_once_t checkOS;
+  
+  dispatch_once(&checkOS, ^{
+    // we only perform this runtime check if this is build against at least iOS7 base SDK
+#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_6_1
+    // runtime check according to
+    // https://developer.apple.com/library/prerelease/ios/documentation/UserExperience/Conceptual/TransitionGuide/SupportingEarlieriOS.html
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+      isPreiOS7Environment = YES;
+    } else {
+      isPreiOS7Environment = NO;
+    }
+#else
+    isPreiOS7Environment = YES;
+#endif
+  });
+  
+  return isPreiOS7Environment;
+}
+
+/**
+ Find a valid app icon filename that points to a proper app icon image
+ 
+ @param icons NSArray with app icon filenames
+ 
+ @return NSString with the valid app icon or nil if none found
+ */
+NSString *bit_validAppIconStringFromIcons(NSBundle *resourceBundle, NSArray *icons) {
+  if (!icons) return nil;
+  if (![icons isKindOfClass:[NSArray class]]) return nil;
+  
+  BOOL useHighResIcon = NO;
+  BOOL useiPadIcon = NO;
+  if ([UIScreen mainScreen].scale == 2.0f) useHighResIcon = YES;
+  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) useiPadIcon = YES;
+  
+  NSString *currentBestMatch = nil;
+  float currentBestMatchHeight = 0;
+  float bestMatchHeight = 0;
+
+  if (bit_isPreiOS7Environment()) {
+    bestMatchHeight = useiPadIcon ? (useHighResIcon ? 144 : 72) : (useHighResIcon ? 114 : 57);
+  } else {
+    bestMatchHeight = useiPadIcon ? (useHighResIcon ? 152 : 76) : 120;
+  }
+  
+  for(NSString *icon in icons) {
+    // Don't use imageNamed, otherwise unit tests won't find the fixture icon
+    // and using imageWithContentsOfFile doesn't load @2x files with absolut paths (required in tests)
+
+    NSString *iconPathExtension = ([[icon pathExtension] length] > 0) ? [icon pathExtension] : @"png";
+    NSMutableArray *iconFilenameVariants = [NSMutableArray new];
+    
+    [iconFilenameVariants addObject:[icon stringByDeletingPathExtension]];
+    [iconFilenameVariants addObject:[NSString stringWithFormat:@"%@@2x", [icon stringByDeletingPathExtension]]];
+    
+    for (NSString *iconFilename in iconFilenameVariants) {
+      // this call already covers "~ipad" files
+      NSString *iconPath = [resourceBundle pathForResource:iconFilename ofType:iconPathExtension];
+      
+      NSData *imgData = [[NSData alloc] initWithContentsOfFile:iconPath];
+    
+      UIImage *iconImage = [[UIImage alloc] initWithData:imgData];
+      
+      if (iconImage) {
+        if (iconImage.size.height == bestMatchHeight) {
+          return iconFilename;
+        } else if (iconImage.size.height < bestMatchHeight &&
+                   iconImage.size.height > currentBestMatchHeight) {
+          currentBestMatchHeight = iconImage.size.height;
+          currentBestMatch = iconFilename;
+        }
+      }
+    }
+  }
+  
+  return currentBestMatch;
+}
+
+NSString *bit_validAppIconFilename(NSBundle *bundle, NSBundle *resourceBundle) {
+  NSString *iconFilename = nil;
+  NSArray *icons = nil;
+  
+  icons = [bundle objectForInfoDictionaryKey:@"CFBundleIconFiles"];
+  iconFilename = bit_validAppIconStringFromIcons(resourceBundle, icons);
+  
+  if (!iconFilename) {
+    icons = [bundle objectForInfoDictionaryKey:@"CFBundleIcons"];
+    if (icons && [icons isKindOfClass:[NSDictionary class]]) {
+      icons = [icons valueForKeyPath:@"CFBundlePrimaryIcon.CFBundleIconFiles"];
+    }
+    iconFilename = bit_validAppIconStringFromIcons(resourceBundle, icons);
+  }
+  
+  // we test iPad structure anyway and use it if we find a result and don't have another one yet
+  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+    icons = [bundle objectForInfoDictionaryKey:@"CFBundleIcons~ipad"];
+    if (icons && [icons isKindOfClass:[NSDictionary class]]) {
+      icons = [icons valueForKeyPath:@"CFBundlePrimaryIcon.CFBundleIconFiles"];
+    }
+    NSString *iPadIconFilename = bit_validAppIconStringFromIcons(resourceBundle, icons);
+    if (iPadIconFilename && !iconFilename) {
+      iconFilename = iPadIconFilename;
+    }
+  }
+
+  if (!iconFilename) {
+    NSString *tempFilename = [bundle objectForInfoDictionaryKey:@"CFBundleIconFile"];
+    if (tempFilename) {
+      iconFilename = bit_validAppIconStringFromIcons(resourceBundle, @[tempFilename]);
+    }
+  }
+  
+  if (!iconFilename) {
+    iconFilename = bit_validAppIconStringFromIcons(resourceBundle, @[@"Icon.png"]);
+  }
+  
+  return iconFilename;
+}
 
 #pragma mark UIImage private helpers
 
@@ -430,10 +579,7 @@ UIImage *bit_newWithContentsOfResolutionIndependentFile(NSString * path) {
 
 
 UIImage *bit_imageWithContentsOfResolutionIndependentFile(NSString *path) {
-#ifndef __clang_analyzer__
-  // clang alayzer in 4.2b3 thinks here's a leak, which is not the case.
   return bit_newWithContentsOfResolutionIndependentFile(path);
-#endif
 }
 
 

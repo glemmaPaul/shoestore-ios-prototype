@@ -47,8 +47,7 @@
 - (UIImage *)grayscaleImage;
 
 // Cropping
-
-//- (UIImage *)cropToRect:(CGRect)rect;
+- (UIImage *)cropToRect:(CGRect)rect;
 
 /**
  Crops the image to a circle with the same center as this image. The radius is half of the width/height (whichever is shorter).
@@ -62,5 +61,25 @@
  @returns A new image, cropped into a circle of the given radius.
  */
 - (UIImage *)cropToCircleWithRadius:(float)radius;
+
+- (BOOL)hasAlpha;
+
+- (UIImage *)imageWithAlpha;
+
+- (UIImage *)transparentBorderImage:(NSUInteger)borderSize;
+
+- (UIImage *)roundedCornerImage:(NSInteger)cornerSize borderSize:(NSInteger)borderSize;
+
+- (UIImage *)thumbnailImage:(NSInteger)thumbnailSize
+          transparentBorder:(NSUInteger)borderSize
+               cornerRadius:(NSUInteger)cornerRadius
+       interpolationQuality:(CGInterpolationQuality)quality;
+
+- (UIImage *)resizedImage:(CGSize)newSize
+     interpolationQuality:(CGInterpolationQuality)quality;
+
+- (UIImage *)resizedImageWithContentMode:(UIViewContentMode)contentMode
+                                  bounds:(CGSize)bounds
+                    interpolationQuality:(CGInterpolationQuality)quality;
 
 @end

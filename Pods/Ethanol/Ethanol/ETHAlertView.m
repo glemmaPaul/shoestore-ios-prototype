@@ -410,13 +410,14 @@
   [label setBackgroundColor:[UIColor clearColor]];
   [label setTextAlignment:NSTextAlignmentCenter];
   
-  CGSize labelSize = [text sizeWithFont:font
-                      constrainedToSize:CGSizeMake(kMaxLabelWidth, kMaxLabelHeight)
-                          lineBreakMode:NSLineBreakByWordWrapping];
+  CGRect labelRect = [text boundingRectWithSize:CGSizeMake(kMaxLabelWidth, kMaxLabelHeight)
+                                       options:NSStringDrawingUsesLineFragmentOrigin
+                                    attributes:@{NSFontAttributeName:font}
+                                       context:nil];
   
   // set frame size
   CGRect labelFrame = label.frame;
-  labelFrame.size = CGSizeMake(kMaxLabelWidth, labelSize.height);
+  labelFrame.size = CGSizeMake(kMaxLabelWidth, labelRect.size.height);
   [label setFrame:labelFrame];
   
   return label;

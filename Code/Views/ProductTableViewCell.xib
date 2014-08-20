@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="14A314h" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProductCell" rowHeight="69" id="KGk-i7-Jjw" customClass="ProductTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="309" height="69"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="309" height="68"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view appearanceType="aqua" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kzy-Ov-NuK">
+                        <rect key="frame" x="7" y="5" width="294" height="63"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NXr-x4-5b7">
+                                <rect key="frame" x="11" y="3" width="58" height="58"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a5J-Db-BhH">
+                                <rect key="frame" x="80" y="10" width="203" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Product available online" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vsS-6u-ucQ">
+                                <rect key="frame" x="80" y="30" width="203" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="16"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Kzy-Ov-NuK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="7" id="6MU-KL-IKS"/>
+                    <constraint firstAttribute="bottom" secondItem="Kzy-Ov-NuK" secondAttribute="bottom" id="EX7-Xh-a74"/>
+                    <constraint firstAttribute="trailing" secondItem="Kzy-Ov-NuK" secondAttribute="trailing" constant="8" id="O7p-Vh-6YB"/>
+                    <constraint firstItem="Kzy-Ov-NuK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="w2N-RR-WTU"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="availabilityLabel" destination="vsS-6u-ucQ" id="CoR-bs-XJU"/>
+                <outlet property="productImageView" destination="NXr-x4-5b7" id="K4n-ad-cMT"/>
+                <outlet property="productTitleLabel" destination="a5J-Db-BhH" id="u7E-AP-dXi"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

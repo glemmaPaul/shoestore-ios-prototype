@@ -6,76 +6,28 @@ Base Project for common libraries in iOS
 Using Ethanol
 -------------
 
-To use the Ethanol libraries in your project, after cloning the project, navigate to the root project folder (ethanol-ios). Then under the folder "Products", there will be an ETH.framework folder. Just drag this framework into your project. 
+There are two ways to use Ethanol :  
+- Add it to your project using Cocoapods  
+
+	pod 'Ethanol'
+	
+  And then run "pod install"
+
+- Use the Ethanol.Framework product along with the Ethanol.bundle, and drag both of there file into your project.
 
 Then to use the libraries, for instance to use the ETHAlertView, just import the class using :
     
-	#import <ETH/ETHAlertView.h>
-
-Generating Ethanol Framework
-----------------------------
-
-To generate the framework (ETH.framework)
-
-1. Add your .h (headers) files to the ETH Target -> Build Phases -> Copy Headers
-2. Add your .m (implementation) files to ETH Target -> Build Phases -> Compile Sources
-3. Add images or any other resources to the ETH Target -> Build Phases -> Copy Bundle Resources
-4. Finally, build the EthanolAggregateTarget.
-
-This will generate ETH.framework in the project root -> Products folder.
-
-
-----------------------------
-
-ETHUpdateChecker is used to check appstore updates
-
-### ETHUpdateChecker Usage Instructions
-
-1. In your `AppDelegate`, set the `appID` for your app: `[[ETHUpdateChecker sharedInstance] setAppID:@"<app_id>"]`.
-
-2. In your `AppDelegate`, set the `alertType` for your app: `[[ETHUpdateChecker sharedInstance] setAlertType:<alert_type>]`.
-
-3. In your `AppDelegate`, add **only one** of the `[[ETHUpdateChecker sharedInstance] checkVersion]` methods.
-
-**NOTE: Call only one of the ETHUpdateChecker methods **
+	#import <ETHAlertView.h>
 	
+Or you can import the master header using:
 
- obj-c
-- (BOOL)application:(UIApplication *)application
-didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  /*
-   ETHUpdateChecker settings
+	#import <Ethanol.h>
 
-   // Set the App ID for your app
-   [[ETHUpdateChecker sharedInstance] setAppID:@"<app_id>"];
 
-   // (Optional) Set the Alert Type for your app By default, the Singleton is initialized to ETUpdateCherkerAlertTypeOption
-   [[ETHUpdateChecker sharedInstance] setAlertType:<alert_type>];
-
-   // Perform check for new version of your app
-   [[ETHUpdateChecker sharedInstance] checkVersion];
-
-   */
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-	/*
-	 Perform daily check for new version of your app
-	 Useful if user returns to you app from background after extended period of time
- 	 Place in applicationDidBecomeActive:
- 	 
- 	 Also, performs version check on first launch.
-   */
-	[[ETHUpdateChecker sharedInstance] checkVersionDaily];
-  
-	/*
-	 Perform weekly check for new version of your app
-	 Useful if user returns to you app from background after extended period of time
-	 Place in applicationDidBecomeActive:
-	 
-	 Also, performs version check on first launch.
-	 */
-	[[ETHUpdateChecker sharedInstance] checkVersionWeekly];
-  }
+Updating pods
+----------------------------
+To update the workspace's Pods, you have to run 'pod update' in the folder that contains the Podfile.
+After the update is completed, in order to run Ethanol Example, it is needed to its target's "Build Phases", and remove the libPod.a from the "Link Binary with Libraries" phase.  
+Since Pods' resources aren't bundled (As of writing this readme) but directly copied into the target Project, Pods' resources aren't copied from "Ethanol" project to "Ethanol Example". The work around used here is to link the Pods with "Ethanol Example", so that it have the relevant resources, but since "Ethanol Example" also depends on "Ethanol" which already contains the Pods library, not doing those steps will result in a "duplicate symbol" error at link time.
 
 

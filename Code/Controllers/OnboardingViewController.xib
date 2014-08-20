@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="14A314h" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OnboardingViewController">
+            <connections>
+                <outlet property="backgroundImageView" destination="P9a-YI-WHP" id="qGB-Zp-dL4"/>
+                <outlet property="collectionView" destination="8qY-ax-aQg" id="bRI-CT-ewL"/>
+                <outlet property="pageControl" destination="EVL-UO-uO0" id="86u-En-mXi"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="P9a-YI-WHP">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <collectionView appearanceType="aqua" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="8qY-ax-aQg">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="a6w-Tp-YRa">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <cells/>
+                </collectionView>
+                <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9B3-xK-ONA" customClass="LineButton">
+                    <rect key="frame" x="17" y="512" width="286" height="46"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="46" id="avT-hN-z0H"/>
+                    </constraints>
+                    <state key="normal" title="Let's get started">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="getStartedPressed:" destination="-1" eventType="touchUpInside" id="T9u-Ht-jUW"/>
+                    </connections>
+                </button>
+                <pageControl appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="EVL-UO-uO0">
+                    <rect key="frame" x="141" y="477" width="39" height="37"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </pageControl>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="P9a-YI-WHP" firstAttribute="leading" secondItem="8qY-ax-aQg" secondAttribute="leading" id="3fQ-kP-uBt"/>
+                <constraint firstItem="8qY-ax-aQg" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="8eP-gC-uAa"/>
+                <constraint firstAttribute="trailing" secondItem="9B3-xK-ONA" secondAttribute="trailing" constant="17" id="9jH-Ia-iPk"/>
+                <constraint firstItem="P9a-YI-WHP" firstAttribute="top" secondItem="8qY-ax-aQg" secondAttribute="top" id="LHC-8U-Bld"/>
+                <constraint firstItem="P9a-YI-WHP" firstAttribute="trailing" secondItem="8qY-ax-aQg" secondAttribute="trailing" id="P91-I7-0MW"/>
+                <constraint firstItem="P9a-YI-WHP" firstAttribute="bottom" secondItem="8qY-ax-aQg" secondAttribute="bottom" id="SZ2-TX-zWA"/>
+                <constraint firstAttribute="bottom" secondItem="9B3-xK-ONA" secondAttribute="bottom" constant="10" id="TSR-F1-dU3"/>
+                <constraint firstAttribute="trailing" secondItem="8qY-ax-aQg" secondAttribute="trailing" id="Wwe-N1-y9u"/>
+                <constraint firstItem="9B3-xK-ONA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="17" id="ejG-Th-6Nz"/>
+                <constraint firstItem="8qY-ax-aQg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hP8-mx-JVc"/>
+                <constraint firstAttribute="bottom" secondItem="8qY-ax-aQg" secondAttribute="bottom" id="ty4-TT-Tji"/>
+            </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+        </view>
+    </objects>
+</document>

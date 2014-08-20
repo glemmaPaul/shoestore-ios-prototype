@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import <HockeySDK/HockeySDK.h>
+#import "OnboardingViewController.h"
 
 @implementation AppDelegate
 
@@ -18,6 +19,12 @@
   [[BITHockeyManager sharedHockeyManager] configureWithBetaIdentifier:kHockeyAppIdentifier liveIdentifier:nil delegate:nil];
   [[BITHockeyManager sharedHockeyManager] startManager];
   [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
+  
+  
+  OnboardingViewController *onboarding = [[OnboardingViewController alloc] initWithNibName:NSStringFromClass([OnboardingViewController class]) bundle:nil];
+  
+  self.window.rootViewController = onboarding;
+  
   
   [self.window makeKeyAndVisible];
   return YES;

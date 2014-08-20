@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="14A314h" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="OnboardSlideCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lp0-4p-cBf">
+                    <rect key="frame" x="106" y="112" width="108" height="92"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="108" id="MIV-s1-Y1k"/>
+                        <constraint firstAttribute="height" constant="92" id="b7N-Wf-BfE"/>
+                    </constraints>
+                </imageView>
+                <textView appearanceType="aqua" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="24S-xV-BLj">
+                    <rect key="frame" x="26" y="269" width="269" height="108"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="108" id="TYb-Mv-YA7"/>
+                        <constraint firstAttribute="width" constant="269" id="Vvl-fP-LhG"/>
+                    </constraints>
+                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </string>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+                <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q0j-vn-K2T">
+                    <rect key="frame" x="40" y="231" width="260" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="fVl-34-AdT"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Q0j-vn-K2T" secondAttribute="trailing" constant="20" id="3WF-vc-FS0"/>
+                <constraint firstItem="24S-xV-BLj" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="269" id="AEB-Ri-vKI"/>
+                <constraint firstItem="lp0-4p-cBf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="112" id="DXZ-bH-ImH"/>
+                <constraint firstAttribute="centerX" secondItem="lp0-4p-cBf" secondAttribute="centerX" id="fxP-R8-Zrw"/>
+                <constraint firstItem="Q0j-vn-K2T" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="40" id="mP6-m7-WWb"/>
+                <constraint firstItem="Q0j-vn-K2T" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="231" id="u5Y-7r-b9M"/>
+                <constraint firstAttribute="centerX" secondItem="24S-xV-BLj" secondAttribute="centerX" id="vph-GU-5PB"/>
+            </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <connections>
+                <outlet property="contentTextView" destination="24S-xV-BLj" id="e3G-mc-K4y"/>
+                <outlet property="iconImageView" destination="lp0-4p-cBf" id="pPN-1v-dbb"/>
+                <outlet property="titleLabel" destination="Q0j-vn-K2T" id="1Eo-mh-42g"/>
+                <outlet property="topPinIconImage" destination="DXZ-bH-ImH" id="1Hc-ql-EUO"/>
+                <outlet property="topPinTextView" destination="AEB-Ri-vKI" id="tMA-SR-T4s"/>
+            </connections>
+        </view>
+    </objects>
+</document>

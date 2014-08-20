@@ -5,22 +5,26 @@ PODS:
   - CocoaLumberjack/Core (1.6.5.1)
   - CocoaLumberjack/Extensions (1.6.5.1):
     - CocoaLumberjack/Core
-  - Ethanol (0.0.7)
-  - HockeySDK (3.5.2)
+  - Ethanol (1.1.0-beta):
+    - Ethanol/Core
+  - Ethanol/Common (1.1.0-beta)
+  - Ethanol/Core (1.1.0-beta):
+    - Ethanol/Common
+  - HockeySDK (3.5.6)
 
 DEPENDENCIES:
   - CocoaLumberjack (~> 1.6.5)
-  - Ethanol (from `https://github.com/Fueled/ethanol-ios.git`, branch `refactor`)
+  - Ethanol (from `https://github.com/Fueled/ethanol-ios.git`, branch `develop`)
   - HockeySDK (~> 3.5.1)
 
 EXTERNAL SOURCES:
   Ethanol:
-    :branch: refactor
+    :branch: develop
     :git: https://github.com/Fueled/ethanol-ios.git
 
 SPEC CHECKSUMS:
-  CocoaLumberjack: 17803afbade3126a377d32b8d23367264b44ced6
-  Ethanol: f578d91538738ac3909a50a3f0198b8a94a413ad
-  HockeySDK: 203d3af93c2a229bfb528ff085201670ff65e1cf
+  CocoaLumberjack: baf4a09a3bcbdfea3363556a90104e026d3504e2
+  Ethanol: b30cac9ae06cd13b0044247139c0f70e91971c7b
+  HockeySDK: 27d8b411208f9d3f70c8f6695a8defa2a3465721
 
-COCOAPODS: 0.27.1
+COCOAPODS: 0.33.1

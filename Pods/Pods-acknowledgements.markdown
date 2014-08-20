@@ -24,7 +24,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 ## Ethanol
 
-Copyright (C) 2013 Fuleld. All Rights Reserved.
+Copyright (C) 2013-2014 Fueled. All Rights Reserved.
 
 ## HockeySDK
 

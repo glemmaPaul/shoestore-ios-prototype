@@ -6,7 +6,6 @@
 //  Copyright (c) 2013 Fueled. All rights reserved.
 //
 
-#error You must replace this string with your hockey app id.
 #ifdef DEBUG
 static NSString * const kHockeyAppIdentifier = @"APP_IDENTIFIER";
 #elif SNAPSHOT
